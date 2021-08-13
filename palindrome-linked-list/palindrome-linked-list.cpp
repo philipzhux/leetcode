@@ -12,15 +12,37 @@ class Solution {
 public:
     ListNode* left;
     bool isPalindrome(ListNode* head) {
-        left = head;
-        return traverse(head);
+        ListNode* left = head;
+        ListNode* fast = head;
+        ListNode* slow = head;
+        while(fast!=NULL && fast->next!=NULL){
+            fast = fast->next->next;
+            slow = slow->next;
+        }
+        if(fast!=NULL){
+            slow = slow->next;
+        }
+        ListNode* ptr = reverse(slow);
+        while(ptr) {
+            if(ptr->val!=left->val) return false;
+            ptr = ptr -> next;
+            left = left -> next;
+        }
+        return true;
     }
     
-    bool traverse(ListNode* head){
-        if(head==NULL) return true;
-        bool res = traverse(head->next);
-        res = res && head->val == left ->val;
-        left = left->next;
-        return res;
+
+    
+    ListNode* reverse(ListNode* head) {
+        ListNode* pre = NULL;
+        ListNode* suc;
+        ListNode* ptr = head;
+        while(ptr){
+            suc = ptr->next;
+            ptr -> next = pre;
+            pre = ptr;
+            ptr = suc;
+        }
+        return pre;
     }
 };
