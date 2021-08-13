@@ -14,29 +14,25 @@ public:
         ListNode* ptr = head;
         ListNode* tmp;
         if(k==1) return head;
-        for(int i=1;i<k;i++){
+        for(int i=0;i<k;i++){
             if(ptr==NULL) return head;
             ptr = ptr->next;
-            if(ptr==NULL) return head;
         }
-        tmp = ptr -> next;
-        ptr -> next = NULL;
-        ptr = reverseEntiry(head);
-        head -> next = reverseKGroup(tmp,k);
-        return ptr;
+        tmp = reverseEntiry(head,ptr);
+        head->next = reverseKGroup(ptr,k);
+        return tmp;
     }
     
-    ListNode* reverseEntiry(ListNode* head) {
+    ListNode* reverseEntiry(ListNode* head,ListNode* tail) {
         ListNode* ptr = head;
         ListNode* pre = NULL;
         ListNode* suc = NULL;
-        while(ptr->next){
+        while(ptr!=tail){
             suc = ptr -> next;
             ptr -> next = pre;
             pre = ptr;
             ptr = suc;
         }
-        ptr->next = pre;
-        return ptr;
+        return pre;
     }
 };
