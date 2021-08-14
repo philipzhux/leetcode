@@ -17,3 +17,5 @@ private:
         path.pop_back();
     }
 };
+
+//key point: record each path on the route and store the path into the result set when destination is reached
