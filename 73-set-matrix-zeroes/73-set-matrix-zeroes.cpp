@@ -23,3 +23,5 @@ public:
         }
     }
 };
+/* alternative: use first row and first column to hold whether that row/col is
+to be zeroed out */
